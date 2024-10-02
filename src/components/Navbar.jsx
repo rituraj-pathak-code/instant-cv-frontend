@@ -42,6 +42,7 @@ const Navbar = () => {
         <Button
           category="primary"
           onClick={()=>navigate('/login')}
+          size="small"
         >
           Login
         </Button>

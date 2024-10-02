@@ -5,11 +5,10 @@ import { FieldArray } from "formik";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 const EducationInfoForm = ({ formik }) => {
-  const { education } = useResumeInfo();
   console.log(formik.values.educationInfo)
   return (
     <div>
-      <h3 className="py-2 font-semibold px-2 bg-[#cecdff] rounded text-white">
+      <h3 className="py-2 font-semibold px-2  rounded-lg text-white border bg-[#8681FF]">
         Education
       </h3>
       <FieldArray name="educationInfo">
@@ -17,12 +16,12 @@ const EducationInfoForm = ({ formik }) => {
           <>
             {formik.values.educationInfo?.map((_, index) => (
               <div
-                className="grid grid-cols-2 gap-4 mt-2 px-[12px] pt-4 pb-8 shadow-sm relative"
+                className="grid grid-cols-2 gap-4 mt-2 px-[12px] pt-4 pb-8 shadow-sm rounded-lg border relative"
                 key={index}
               >
                 {index!==0 && 
                     <button className="absolute right-2 top-2 bg-red-200 p-[4px] rounded-full" onClick={()=>remove(index)}>
-                    <FaRegTrashAlt color="red"/>
+                    <FaRegTrashAlt color="red" size={12}/>
                 </button>
                 
                 }

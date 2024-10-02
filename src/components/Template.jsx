@@ -2,14 +2,22 @@ import { FaGithub } from "react-icons/fa";
 import { useResumeInfo } from "../contexts/ResumeInfoContext";
 
 const Template = () => {
-    const {personalInfo,education} = useResumeInfo()
+  const { personalInfo, education, skills, experience, projects } =
+    useResumeInfo();
   return (
-      <div className="min-h-[80vh] shadow py-6 px-4 text-xs w-full bg-white">
-        {/* HEADER */}
-        <div>
-          <h2 className="font-bold text-lg text-center">{personalInfo?.firstName || "FIRSTNAME"}  {personalInfo?.lastName || "LASTNAME"}</h2>
-          <p className="text-center my-[3px]">{personalInfo?.phone || "+91 00000-00000"} / {personalInfo?.email || "rituu@gamil.com"}</p>
-          <div className="flex justify-center items-center gap-4">
+    <div className="min-h-[80vh] shadow py-6 px-4 text-xs w-full bg-white">
+      {/* HEADER */}
+      <div>
+        <h2 className="font-bold text-lg text-center">
+          {personalInfo?.firstName} {personalInfo?.lastName}
+        </h2>
+        {personalInfo?.phone && personalInfo?.email && (
+          <p className="text-center my-[3px]">
+            {personalInfo?.phone} / {personalInfo?.email}
+          </p>
+        )}
+        <div className="flex justify-center items-center gap-4">
+          {personalInfo?.github && (
             <a
               href={personalInfo?.github}
               className="flex justify-center items-center gap-2 text-blue-900"
@@ -18,6 +26,8 @@ const Template = () => {
               <FaGithub />
               <span>GITHUB</span>
             </a>
+          )}
+          {personalInfo?.linkedin && (
             <a
               href={personalInfo?.linkedin}
               className="flex justify-center items-center gap-2 text-blue-900"
@@ -26,6 +36,8 @@ const Template = () => {
               <FaGithub />
               <span>LINKEDIN</span>
             </a>
+          )}
+          {personalInfo?.portfolio && (
             <a
               href={personalInfo?.portfolio}
               className="flex justify-center items-center gap-2 text-blue-900"
@@ -34,6 +46,8 @@ const Template = () => {
               <FaGithub />
               <span>PORTFOLIO</span>
             </a>
+          )}
+          {personalInfo?.leetcode && (
             <a
               href={personalInfo?.leetcode}
               className="flex justify-center items-center gap-2 text-blue-900"
@@ -42,138 +56,113 @@ const Template = () => {
               <FaGithub />
               <span>LEETCODE</span>
             </a>
-          </div>
+          )}
         </div>
-        {/* EDUCATION */}
-        <div className="my-[10px]">
-          <h3 className="border-b-black border-b-[1px] pb-[3px] text-base font-bold">
-            EDUCATION
-          </h3>
-          {education.map((item,index)=> (
-            <div className="flex justify-between items-start pt-[5px] text" key={index}>
+      </div>
+      {/* EDUCATION */}
+      <div className="my-[10px]">
+        <h3 className="border-b-black border-b-[1px] pb-[3px] text-base font-bold">
+          EDUCATION
+        </h3>
+        {education.map((item, index) => (
+          <div
+            className="flex justify-between items-start pt-[5px] text"
+            key={index}
+          >
             <div>
-              <h4 className="font-semibold">{item?.degree || "B.TECH in Computer Science"}</h4>
-              <p>{item?.institute || "Jorhat Engineering College"}</p>
+              <h4 className="font-semibold">{item?.degree}</h4>
+              <p>{item?.institute}</p>
             </div>
-            <p>{item?.start_date && `${item.start_date} - `}{item?.end_date || "xxxx"}</p>
+            <p>
+              {item?.start_date && `${item.start_date} - `}
+              {item?.end_date}
+            </p>
           </div>
+        ))}
+      </div>
+
+      {/* EXPERIENCE */}
+      <div className="my-[10px]">
+        <h3 className="border-b-black border-b-[1px] pb-[3px] text-base font-bold">
+          EXPERIENCE
+        </h3>
+
+        <div className="pt-[5px]">
+          {experience.map((exp, index) => (
+            <div key={index}>
+              <div className="flex justify-between w-full">
+                <div>
+                  <h4 className="font-semibold">{exp.role}</h4>
+                  <p>{exp.company}</p>
+                </div>
+                <div>
+                  <p>
+                    {exp?.start_date && `${exp.start_date} - `}
+                    {exp?.end_date}
+                  </p>
+                </div>
+              </div>
+              <ul className="mt-[5px] list-disc ml-4">
+                {exp.description.map(
+                  (desc, i) => desc && <li key={`${index}${i}`}>{desc}</li>
+                )}
+              </ul>
+            </div>
           ))}
         </div>
-        {/* SKILLS */}
-        <div className="my-[10px]">
-          <h3 className="border-b-black border-b-[1px] pb-[3px] text-base font-bold">
-            SKILLS
-          </h3>
-          <div className="flex gap-6 pt-[5px]">
-            <div className="font-semibold">
-              <h4>Languages :</h4>
-              <h4>Frameworks/Libraries :</h4>
-              <h4>Database :</h4>
-              <h4>Other :</h4>
-            </div>
-            <div className="">
-              <p>Java, JavaScript, Python, C++, HTML, CSS</p>
-              <p>React, NodeJS, Express, TailwindCSS, Redux, React Query</p>
-              <p>MongoDB, MySQL</p>
-              <p>Git, Linux, DSA, OS, DBMS</p>
-            </div>
-          </div>
+      </div>
+      {/* PROJECTS */}
+      <div className="my-[10px]">
+        <h3 className="border-b-black border-b-[1px] pb-[3px] text-base font-bold">
+          PROJECTS
+        </h3>
+        <div className="pt-[5px]">
+          {projects.map(
+            (item, index) =>
+              item.title &&
+              item?.description && (
+                <div key={index}>
+                  <p>
+                    <span className="font-semibold">{item?.title} : </span>{" "}
+                    {item?.description}{" "}
+                    <a href="" className="text-blue-900 underline">
+                      {item?.link}
+                    </a>
+                  </p>
+                </div>
+              )
+          )}
         </div>
-        {/* EXPERIENCE */}
-        <div className="my-[10px]">
-          <h3 className="border-b-black border-b-[1px] pb-[3px] text-base font-bold">
-            EXPERIENCE
-          </h3>
-          <div className="pt-[5px]">
-            <div>
-              <div className="flex justify-between w-full">
-                <div>
-                  <h4 className="font-semibold">Role Name</h4>
-                  <p>Company Name</p>
-                </div>
-                <div>
-                  <p>2012-2018</p>
-                </div>
+      </div>
+      {/* SKILLS */}
+      <div className="my-[10px]">
+        <h3 className="border-b-black border-b-[1px] pb-[3px] text-base font-bold">
+          SKILLS
+        </h3>
+        <div className="flex gap-6 pt-[5px]">
+          <div className="font-semibold">
+            {skills.map(
+              (item, index) =>
+                item.skill_type && <h4 key={index}>{item?.skill_type} :</h4>
+            )}
+          </div>
+          <div className="">
+            {skills.map((item, index) => (
+              <div className="flex gap-[5px]" key={index}>
+                {item.skills.map(
+                  (skill, idx) =>
+                    skill && (
+                      <p key={`${index}${idx}`}>
+                        {skill} {idx !== item.skills.length - 1 && ","}
+                      </p>
+                    )
+                )}
               </div>
-              <ul className="mt-[5px] list-disc ml-4">
-                <li>Achieved X% growth for XYZ using A, B and C skills</li>
-                <li>Led XYZ which led X% improvement of PQR</li>
-                <li>Achieved X% growth for XYZ using A, B and C skills</li>
-              </ul>
-            </div>
-            <div className="mt-2">
-              <div className="flex justify-between w-full">
-                <div>
-                  <h4 className="font-semibold">Role Name</h4>
-                  <p>Company Name</p>
-                </div>
-                <div>
-                  <p>2012-2018</p>
-                </div>
-              </div>
-              <ul className="mt-[5px] list-disc ml-4">
-                <li>Achieved X% growth for XYZ using A, B and C skills</li>
-                <li>Led XYZ which led X% improvement of PQR</li>
-                <li>Achieved X% growth for XYZ using A, B and C skills</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        {/* PROJECTS */}
-        <div className="my-[10px]">
-          <h3 className="border-b-black border-b-[1px] pb-[3px] text-base font-bold">
-            PROJECTS
-          </h3>
-          <div className="pt-[5px]">
-            <div>
-              <p>
-                <span className="font-semibold">PROJECT TITLE : </span> Lorem
-                ipsum dolor sit amet consectetur, adipisicing elit. Iste
-                repellendus expedita provident aperiam autem dolores minima
-                magnam illum et atque perferendis veritatis quod nesciunt vel
-                asperiores repellat recusandae, dolore enim.{" "}
-                <a href="" className="text-blue-900 underline">
-                  Try it Here
-                </a>
-              </p>
-            </div>
-            <div className="mt-2">
-              <p>
-                <span className="font-semibold">PROJECT TITLE : </span> Lorem
-                ipsum dolor sit amet consectetur, adipisicing elit. Iste
-                repellendus expedita provident aperiam autem dolores minima
-                magnam illum et atque perferendis veritatis quod nesciunt vel
-                asperiores repellat recusandae, dolore enim.{" "}
-                <a href="" className="text-blue-900 underline">
-                  Try it Here
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-        {/* CERTIFICATIONS */}
-        <div className="my-[10px]">
-          <h3 className="border-b-black border-b-[1px] pb-[3px] text-base font-bold">
-            CERTIFICATIONS
-          </h3>
-          <div className="pt-[5px]">
-            <ul className="list-disc ml-4">
-              <li>
-                XYZ university certification course{" "}
-                <a href="" className="text-blue-900 underline">
-                  (Link Here)
-                </a>
-              </li>
-              <li>
-                Certificate from an online course{" "}
-                <a href="" className="text-blue-900 underline">
-                  (Link Here)
-                </a>
-              </li>
-            </ul>
+            ))}
           </div>
         </div>
       </div>
+    </div>
   );
 };
 

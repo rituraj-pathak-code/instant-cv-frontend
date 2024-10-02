@@ -8,7 +8,7 @@ const Builder = () => {
 
   return (
     <ResumeInfoProvider>
-        <div className="w-full">
+        <div className="w-full mt-12 mb-24">
             <h2 className="text-[#13287E] font-bold text-2xl my-4 text-center">
             Fill Your Information
             </h2>
@@ -16,7 +16,7 @@ const Builder = () => {
             <div className="w-[50%] py-4">
                 <ResumeForm />
             </div>
-            <div className="w-[50%] py-4 px-4 bg-[#fffaea] my-4">
+            <div className="w-[50%] py-4 px-4 bg-[#fffaea] h-fit my-4">
                 <Template />
             </div>
             </div>

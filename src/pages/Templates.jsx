@@ -1,7 +1,6 @@
-import resumeone from "../assets/resume_1.jpg";
+import resumeone from "../assets/resume1.png";
 import TemplateCard from "../components/TemplateCard";
 import { templatePageTexts } from "../constants/texts";
-import ResumeOne from "../components/resume/ResumeOne"
 
 const Templates = () => {
   return (
@@ -15,7 +14,7 @@ const Templates = () => {
         </p>
       </div>
       <div className="grid grid-cols-3 gap-4 pb-12 pt-4">
-        <TemplateCard image={resumeone} component={<ResumeOne/>} resumeId = {1}/>
+        <TemplateCard image={resumeone} resumeId = {1}/>
       </div>
     </>
   );
