@@ -32,8 +32,8 @@ export const ResumeInfoProvider = ({ children }) => {
     {
       company: "",
       role: "",
-      start_year: "",
-      end_year: "",
+      start_date: "",
+      end_date: "",
       description: [""]
     },
   ]);

@@ -39,8 +39,8 @@ const experienceSchema = Yup.object().shape({
       Yup.object().shape({
         role: Yup.string().required("Role is required"),
         company: Yup.string().required("Institution name is required"),
-        start_year: Yup.string().required("Start year is required"),
-        end_year: Yup.string().required("End year is required"),
+        start_date: Yup.string().required("Start year is required"),
+        end_date: Yup.string().required("End year is required"),
         description: Yup.array()
         .of(Yup.string().trim().required("Description cannot be empty"))
         .min(1, "At least one description is required")

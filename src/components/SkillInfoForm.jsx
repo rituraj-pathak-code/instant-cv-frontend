@@ -5,9 +5,10 @@ import { FieldArray } from "formik";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 const SkillInfoForm = ({ formik }) => {
+  
   return (
     <div>
-      <h3 className="py-2 font-semibold px-2  rounded-lg text-white border bg-[#8681FF]">
+      <h3 className="py-2 font-bold rounded-lg text-black text-lg mt-4">
         Skills
       </h3>
       <FieldArray name="skillsInfo">

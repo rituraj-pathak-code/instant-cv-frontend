@@ -39,7 +39,7 @@ const ResumeForm = () => {
       } else {
         const key = stepsConfig[step].key;
         const currentError = errors[key];
-        errorDisplayForResumeForms(currentError)
+        errorDisplayForResumeForms(currentError);
       }
     });
   };
@@ -55,9 +55,18 @@ const ResumeForm = () => {
       setStep((prev) => prev - 1);
     }
   };
+  console.log((step/(stepsConfig.length-1))*100)
+  console.log(step,stepsConfig.length)
 
   return (
     <div>
+      <p className="mb-[5px] text-white font-semibold text-[9px] bg-[#FE7D8B] py-[4px] px-2 w-fit rounded-full">{(step/(stepsConfig.length-1))*100}% Complete</p>
+      <div className="bg-gray-300 w-full">
+        <div
+          className={`h-[3px] bg-[#FE7D8B] rounded transition`}
+          style={{ width: `${(step/(stepsConfig.length-1))*100}%` }}
+        ></div>
+      </div>
       <Formik
         initialValues={{
           personalInfo: { ...personalInfo },

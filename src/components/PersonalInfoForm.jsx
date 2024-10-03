@@ -3,8 +3,8 @@ import TextField from './TextField'
 const PersonalInfoForm = ({formik}) => {
   return (
     <div>
-        <h3 className="py-2 font-semibold px-2  rounded-lg text-white border bg-[#8681FF]">Personal Information</h3>
-        <div className="grid grid-cols-2 gap-4 mt-2 px-[24px] pt-4 pb-8 shadow-sm rounded-lg border">
+        <h3 className="py-2 font-bold rounded-lg text-black text-lg mt-">Personal Information</h3>
+        <div className="grid grid-cols-2 gap-4 mt-2 rounded-lg">
           <TextField label={"First Name"} name="personalInfo.firstName" onChange={formik?.handleChange} value={formik?.values?.personalInfo?.firstName}  />
           <TextField label={"Last Name"} name="personalInfo.lastName" onChange={formik?.handleChange} value={formik?.values?.personalInfo?.lastName} />
           <TextField label={"Phone Number"} name="personalInfo.phone" onChange={formik?.handleChange} value={formik?.values?.personalInfo?.phone} />

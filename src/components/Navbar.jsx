@@ -8,8 +8,8 @@ const Navbar = () => {
   const navigate = useNavigate()
   return (
     <div
-      className={`flex justify-between items-center px-32 py-6 sticky top-0 transition-all duration-500 border-[1px] border-gray-100 
-        ${scrollPosition > 200 ? "bg-[#CCD7E8]" : "bg-white"}`}
+      className={`flex justify-between items-center px-32 py-4 sticky top-0 transition-all bg-white duration-300 border-[1px] border-gray-100 
+        ${scrollPosition > 250 && "translate-y-[-100%]"}`}
     >
       <div>
         <img src={logo} alt="" className="w-[180px]" />

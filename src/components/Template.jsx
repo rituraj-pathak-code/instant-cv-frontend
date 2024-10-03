@@ -5,7 +5,7 @@ const Template = () => {
   const { personalInfo, education, skills, experience, projects } =
     useResumeInfo();
   return (
-    <div className="min-h-[80vh] shadow py-6 px-4 text-xs w-full bg-white">
+    <div className="min-h-[83vh] shadow py-6 px-4 text-xs w-[500px] bg-white">
       {/* HEADER */}
       <div>
         <h2 className="font-bold text-lg text-center">

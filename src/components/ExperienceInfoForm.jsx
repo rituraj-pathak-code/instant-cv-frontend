@@ -7,7 +7,7 @@ const ExperienceInfoForm = ({ formik }) => {
     console.log(formik.values.experienceInfo)
   return (
     <div>
-      <h3 className="py-2 font-semibold px-2  rounded-lg text-white border bg-[#8681FF]">
+      <h3 className="py-2 font-bold rounded-lg text-black text-lg mt-4">
         EXPERIENCE
       </h3>
       <FieldArray name="experienceInfo">
@@ -15,7 +15,7 @@ const ExperienceInfoForm = ({ formik }) => {
           <>
             {formik.values.experienceInfo?.map((experienceGroup, index) => (
               <div
-                className="grid grid-cols-1 gap-4 mt-2 px-[12px] pt-4 pb-8 shadow-sm  rounded-lg border relative"
+                className="grid grid-cols-1 gap-4 mt-2 px-[12px] pt-4 pb-8 rounded border relative"
                 key={index}
               >
                 {index !== 0 && (
@@ -43,13 +43,13 @@ const ExperienceInfoForm = ({ formik }) => {
                 <div className="flex gap-4">
                     <TextField
                     label={"From"}
-                    name={`experienceInfo[${index}].start_year`}
+                    name={`experienceInfo[${index}].start_date`}
                     onChange={formik?.handleChange}
                     value={formik.values.experienceInfo[index].start_year}
                     />
                     <TextField
                     label={"To"}
-                    name={`experienceInfo[${index}].end_year`}
+                    name={`experienceInfo[${index}].end_date`}
                     onChange={formik?.handleChange}
                     value={formik.values.experienceInfo[index].end_year}
                     />

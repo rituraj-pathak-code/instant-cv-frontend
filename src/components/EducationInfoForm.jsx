@@ -8,7 +8,7 @@ const EducationInfoForm = ({ formik }) => {
   console.log(formik.values.educationInfo)
   return (
     <div>
-      <h3 className="py-2 font-semibold px-2  rounded-lg text-white border bg-[#8681FF]">
+      <h3 className="py-2 font-bold rounded-lg text-black text-lg mt-4">
         Education
       </h3>
       <FieldArray name="educationInfo">
@@ -16,7 +16,7 @@ const EducationInfoForm = ({ formik }) => {
           <>
             {formik.values.educationInfo?.map((_, index) => (
               <div
-                className="grid grid-cols-2 gap-4 mt-2 px-[12px] pt-4 pb-8 shadow-sm rounded-lg border relative"
+                className="grid grid-cols-2 gap-4 mt-2 px-[12px] pt-4 pb-8 rounded border relative"
                 key={index}
               >
                 {index!==0 && 
