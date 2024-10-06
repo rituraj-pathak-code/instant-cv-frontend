@@ -10,8 +10,8 @@ Provide a variety of professionally designed templates to choose from.
 Allow users to customize colors, fonts, and layouts.
 Drag-and-Drop Interface:
 
-Enable easy rearrangement of sections (e.g., Education, Experience) within the resume.
-Section Management:
+<!-- Enable easy rearrangement of sections (e.g., Education, Experience) within the resume.
+Section Management: -->
 
 Allow users to add, edit, or delete sections such as Work Experience, Education, Skills, Projects, Certifications, etc.
 Content Suggestions:
@@ -20,8 +20,8 @@ Provide bullet points or examples for different job roles and industries.
 Include tips on how to highlight achievements and skills effectively.
 Real-time Preview:
 
-Display a real-time preview of the resume as users make changes.
-Export Options:
+<!-- Display a real-time preview of the resume as users make changes.
+Export Options: -->
 
 Allow users to download resumes in multiple formats, such as PDF, DOCX, and TXT.
 Print Option:

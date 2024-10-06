@@ -14,6 +14,11 @@
     background-size:contain;
     background-position: left;
 }
+.dark_gradient {
+  background: linear-gradient(#656e83dc,#656e83d8) ,url('./assets/resume_back.jpg');
+  background-size: cover;
+  background-repeat: repeat;
+}
 ::-webkit-scrollbar {
     width: 10px;
   }

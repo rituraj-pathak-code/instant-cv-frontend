@@ -1,13 +1,51 @@
 import { FaGithub } from "react-icons/fa";
 import { useResumeInfo } from "../contexts/ResumeInfoContext";
+import { useCallback, useEffect, useState } from "react";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import {reorder } from "../config/util";
+import { getResumeUIArray } from "../config/uiUtils";
+
 
 const Template = () => {
-  const { personalInfo, education, skills, experience, projects } =
-    useResumeInfo();
+  const { personalInfo, education, skills, experience, projects } = useResumeInfo();
+  const [items, setItems] = useState([]);
+
+  const onDragEnd = useCallback(
+    (result) => {
+      if (!result.destination) {
+        return;
+      }
+      const reorderedItems = reorder(
+        items,
+        result.source.index,
+        result.destination.index
+      );
+      console.log(reorderedItems);
+
+      setItems(reorderedItems);
+    },
+    [items]
+  );
+
+  const getItemStyle = (isDragging, draggableStyle) => ({
+    userSelect: "none",
+    padding: "0.02px",
+    background: isDragging ? "lightgreen" : "",
+    ...draggableStyle,
+  });
+
+
+  useEffect(() => {
+    setItems(
+      getResumeUIArray(education, skills, experience, projects)
+    );
+  }, [education, skills, experience, projects]);
+
+
   return (
     <div className="min-h-[83vh] shadow py-6 px-4 text-xs w-[500px] bg-white">
-      {/* HEADER */}
-      <div>
+
+      <div className="mb-[5px]">
         <h2 className="font-bold text-lg text-center">
           {personalInfo?.firstName} {personalInfo?.lastName}
         </h2>
@@ -59,109 +97,37 @@ const Template = () => {
           )}
         </div>
       </div>
-      {/* EDUCATION */}
-      <div className="my-[10px]">
-        <h3 className="border-b-black border-b-[1px] pb-[3px] text-base font-bold">
-          EDUCATION
-        </h3>
-        {education.map((item, index) => (
-          <div
-            className="flex justify-between items-start pt-[5px] text"
-            key={index}
-          >
-            <div>
-              <h4 className="font-semibold">{item?.degree}</h4>
-              <p>{item?.institute}</p>
-            </div>
-            <p>
-              {item?.start_date && `${item.start_date} - `}
-              {item?.end_date}
-            </p>
-          </div>
-        ))}
-      </div>
 
-      {/* EXPERIENCE */}
-      <div className="my-[10px]">
-        <h3 className="border-b-black border-b-[1px] pb-[3px] text-base font-bold">
-          EXPERIENCE
-        </h3>
-
-        <div className="pt-[5px]">
-          {experience.map((exp, index) => (
-            <div key={index}>
-              <div className="flex justify-between w-full">
-                <div>
-                  <h4 className="font-semibold">{exp.role}</h4>
-                  <p>{exp.company}</p>
-                </div>
-                <div>
-                  <p>
-                    {exp?.start_date && `${exp.start_date} - `}
-                    {exp?.end_date}
-                  </p>
-                </div>
-              </div>
-              <ul className="mt-[5px] list-disc ml-4">
-                {exp.description.map(
-                  (desc, i) => desc && <li key={`${index}${i}`}>{desc}</li>
-                )}
-              </ul>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="droppable" isCombineEnabled={false}>
+          {(provided, snapshot) => (
+            <div
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              style={{ background: snapshot.isDraggingOver ? "lightblue" : "" }}
+            >
+              {items.map((item, index) => (
+                <Draggable key={item.id} draggableId={item.id} index={index}>
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      style={getItemStyle(
+                        snapshot.isDragging,
+                        provided.draggableProps.style
+                      )}
+                    >
+                      {item.content}
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
             </div>
-          ))}
-        </div>
-      </div>
-      {/* PROJECTS */}
-      <div className="my-[10px]">
-        <h3 className="border-b-black border-b-[1px] pb-[3px] text-base font-bold">
-          PROJECTS
-        </h3>
-        <div className="pt-[5px]">
-          {projects.map(
-            (item, index) =>
-              item.title &&
-              item?.description && (
-                <div key={index}>
-                  <p>
-                    <span className="font-semibold">{item?.title} : </span>{" "}
-                    {item?.description}{" "}
-                    <a href="" className="text-blue-900 underline">
-                      {item?.link}
-                    </a>
-                  </p>
-                </div>
-              )
           )}
-        </div>
-      </div>
-      {/* SKILLS */}
-      <div className="my-[10px]">
-        <h3 className="border-b-black border-b-[1px] pb-[3px] text-base font-bold">
-          SKILLS
-        </h3>
-        <div className="flex gap-6 pt-[5px]">
-          <div className="font-semibold">
-            {skills.map(
-              (item, index) =>
-                item.skill_type && <h4 key={index}>{item?.skill_type} :</h4>
-            )}
-          </div>
-          <div className="">
-            {skills.map((item, index) => (
-              <div className="flex gap-[5px]" key={index}>
-                {item.skills.map(
-                  (skill, idx) =>
-                    skill && (
-                      <p key={`${index}${idx}`}>
-                        {skill} {idx !== item.skills.length - 1 && ","}
-                      </p>
-                    )
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+        </Droppable>
+      </DragDropContext>
     </div>
   );
 };

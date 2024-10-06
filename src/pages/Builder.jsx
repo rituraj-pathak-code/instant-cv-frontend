@@ -20,7 +20,7 @@ const Builder = () => {
             </div>
             <ResumeForm />
           </div>
-          <div className="w-[50%] px-24 bg-[#656E83] h-full flex justify-center items-center sticky right-0 top-0">
+          <div className="w-[50%] px-8 h-full flex justify-center items-center sticky right-0 top-0 dark_gradient">
             <Template />
           </div>
         </div>

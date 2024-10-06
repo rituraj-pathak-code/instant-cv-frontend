@@ -20,7 +20,7 @@ const Signup = () => {
         const headers = {
             'Content-Type': "application/json"
         }
-        const res = await axios.post("http://localhost:8000/api/signup",user,{headers});
+        const res = await axios.get("http://localhost:8000/api/sign-in",user,{headers});
         console.log(res)
 
     }

@@ -12,6 +12,8 @@ import Login from "./pages/Login.jsx";
 import Builder from "./pages/Builder.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthenticationProvider } from "./contexts/AuthenticationContext.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -46,24 +48,26 @@ const router = createBrowserRouter([
   },
   {
     path: "/resume-build/:id",
-    element: <Builder />,
+    element: <ProtectedRoute element={<Builder />}  />,
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthenticationProvider>
+      <RouterProvider router={router} />
+    </AuthenticationProvider>
     <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
   </StrictMode>
 );
