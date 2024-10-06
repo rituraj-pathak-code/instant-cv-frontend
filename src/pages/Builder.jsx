@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import ResumeForm from "../components/ResumeForm";
-import Template from "../components/Template";
+import Template from "../components/ResumeTemplates/Template";
 import { ResumeInfoProvider } from "../contexts/ResumeInfoContext";
 
 const Builder = () => {
