@@ -40,14 +40,6 @@ const Navbar = () => {
           Home
         </NavLink>
         <NavLink
-          to={"/about"}
-          className={({ isActive }) =>
-            isActive ? "font-semibold text-[#8681FF]" : ""
-          }
-        >
-          About Us
-        </NavLink>
-        <NavLink
           to={"/templates"}
           className={({ isActive }) =>
             isActive ? "font-semibold text-[#8681FF]" : ""

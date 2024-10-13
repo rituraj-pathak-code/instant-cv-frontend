@@ -28,7 +28,7 @@ const App = () => {
   return (
     <div className="">
       <Navbar />
-      <div className={`min-h-[100vh] ${isResumeBuilder ? "" : "px-32"}`}>
+      <div className={`min-h-[100vh] ${isResumeBuilder ? "" : "px-40"}`}>
         <Outlet />
       </div>
       <Footer />

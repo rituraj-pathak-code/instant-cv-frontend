@@ -16,7 +16,7 @@ const Banner = () => {
           <FaLightbulb color="#FDDA0D" />
           <p>{bannerTexts?.tagline}</p>
         </span>
-        <h2 className="font-bold text-[#13287E] text-5xl">
+        <h2 className="font-extrabold text-[#13287E] text-5xl">
           {bannerTexts?.header}
         </h2>
         <p className="text-gray-500">{bannerTexts?.description}</p>

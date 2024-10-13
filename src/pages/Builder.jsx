@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ResumeForm from "../components/ResumeForm";
 import Template from "../components/ResumeTemplates/Template";
 import { ResumeInfoProvider } from "../contexts/ResumeInfoContext";
+import Template2 from "../components/ResumeTemplates/Template2";
 
 const Builder = () => {
   const { id: resumeId } = useParams();
@@ -21,7 +22,8 @@ const Builder = () => {
             <ResumeForm />
           </div>
           <div className="w-[50%] px-8 h-full flex justify-center items-center sticky right-0 top-0 dark_gradient">
-            <Template />
+            {resumeId == 1 &&  <Template />}
+            {resumeId == 2 &&  <Template2 />}
           </div>
         </div>
       </div>
