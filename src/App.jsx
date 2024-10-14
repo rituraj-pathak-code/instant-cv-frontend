@@ -26,9 +26,9 @@ const App = () => {
 
   const isResumeBuilder = location.pathname.startsWith("/resume-build");
   return (
-    <div className="">
+    <div className="bg-gray-100">
       <Navbar />
-      <div className={`min-h-[100vh] ${isResumeBuilder ? "" : "px-40"}`}>
+      <div className={`min-h-[100vh] max-w-[1600px] bg-white m-auto ${isResumeBuilder ? "" : "xl:px-40 lg:px-20 md:px-12 px-4"}`}>
         <Outlet />
       </div>
       <Footer />

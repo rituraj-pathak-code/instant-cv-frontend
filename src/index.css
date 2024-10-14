@@ -11,13 +11,16 @@
 .banner_blob{
     background: url('./assets/blob.png');
     background-repeat: no-repeat;
-    background-size:contain;
+    background-size:cover;
     background-position: left;
 }
 .dark_gradient {
   background: linear-gradient(#656e83dc,#656e83d8) ,url('./assets/resume_back.jpg');
   background-size: cover;
   background-repeat: repeat;
+}
+.section-gradient {
+  background: linear-gradient(to right, #fff,#f3f0e7,#fff) ;
 }
 ::-webkit-scrollbar {
     width: 10px;
