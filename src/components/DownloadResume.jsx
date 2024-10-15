@@ -15,7 +15,7 @@ const DownloadResume = () => {
   };
   return (
     <div className="flex flex-col items-center justify-center gap-8 mt-8">
-      <h2 className="text-xl font-bold">Your Job Ready Resume us Ready!</h2>
+      <h2 className="text-xl font-bold text-center">Your Job Ready Resume is Ready!</h2>
       <div>
         <Button onClick={downloadResume} category="success" size="large">
           DOWNLOAD

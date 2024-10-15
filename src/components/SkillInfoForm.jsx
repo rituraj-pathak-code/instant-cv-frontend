@@ -1,5 +1,5 @@
 import TextField from "./TextField";
-import Button from "../components/Button";
+import Button from "./Button";
 import { useResumeInfo } from "../contexts/ResumeInfoContext";
 import { FieldArray } from "formik";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -76,7 +76,7 @@ const SkillInfoForm = ({ formik }) => {
                               value={
                                 formik.values.skillsInfo[index].skills[idx]
                               }
-                              width={"150px"}
+                              width={"100%"}
                             />
                           </div>
                         ))}

@@ -1,6 +1,5 @@
 import TextField from "./TextField";
-import Button from "../components/Button";
-import { useResumeInfo } from "../contexts/ResumeInfoContext";
+import Button from "./Button";
 import { FieldArray } from "formik";
 import { FaRegTrashAlt } from "react-icons/fa";
 
@@ -16,7 +15,7 @@ const EducationInfoForm = ({ formik }) => {
           <>
             {formik.values.educationInfo?.map((_, index) => (
               <div
-                className="grid grid-cols-2 gap-4 mt-2 px-[12px] pt-4 pb-8 rounded border relative"
+                className="grid lg:grid-cols-2 gap-4 mt-2 px-[12px] pt-4 pb-8 rounded border relative"
                 key={index}
               >
                 {index!==0 && 

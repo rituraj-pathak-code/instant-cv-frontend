@@ -1,5 +1,5 @@
 import TextField from "./TextField";
-import Button from "../components/Button";
+import Button from "./Button";
 import { FieldArray } from "formik";
 import { FaRegTrashAlt } from "react-icons/fa";
 
@@ -26,7 +26,7 @@ const ExperienceInfoForm = ({ formik }) => {
                     <FaRegTrashAlt color="red" size={12} />
                   </button>
                 )}
-                <div className="flex gap-4">
+                <div className="flex flex-col lg:flex-row gap-4">
                     <TextField
                     label={"Role Name"}
                     name={`experienceInfo[${index}].role`}
@@ -40,7 +40,7 @@ const ExperienceInfoForm = ({ formik }) => {
                     value={formik.values.experienceInfo[index].company}
                     />
                 </div>
-                <div className="flex gap-4">
+                <div className="flex flex-col lg:flex-row gap-4">
                     <TextField
                     label={"From"}
                     name={`experienceInfo[${index}].start_date`}
@@ -57,7 +57,7 @@ const ExperienceInfoForm = ({ formik }) => {
                 <FieldArray name={`experienceInfo[${index}].description`}>
                   {({ push, remove }) => (
                     <div>
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col lg:flex-row justify-between">
                         <p className="text-sm mb-[3px]">Description</p>
                         <div className="flex gap-4">
                           <button

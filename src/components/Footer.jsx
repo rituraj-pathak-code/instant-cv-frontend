@@ -1,7 +1,7 @@
 
 const Footer = () => {
   return (
-    <div className="bg-[#000] py-2 text-center text-white">Footer</div>
+    <div className="bg-[#f3f0e7] py-2 text-center font-semibold text-[brown]">Designed & Developed by Rituraj Pathak</div>
   )
 }
 

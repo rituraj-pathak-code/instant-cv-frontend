@@ -1,12 +1,12 @@
 import { FaGithub } from "react-icons/fa";
-import { useResumeInfo } from "../../contexts/ResumeInfoContext";
+import { useResumeInfo } from "../../../contexts/ResumeInfoContext";
 import { useCallback, useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import {reorder } from "../../config/util";
-import { getResumeUIArray } from "../../config/uiUtils";
+import {reorder } from "../../../config/util";
+import { getResumeUIArray } from "../../../config/uiUtils";
 
 
-const Template2 = () => {
+const Template = () => {
   const { personalInfo, education, skills, experience, projects } = useResumeInfo();
   const [items, setItems] = useState([]);
 
@@ -132,4 +132,4 @@ const Template2 = () => {
   );
 };
 
-export default Template2;
+export default Template;

@@ -3,13 +3,15 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "./contexts/AuthenticationContext";
 import { fetchUserData } from "./config";
+import Loader from "./components/Loader";
 
 const App = () => {
   const location = useLocation();
   const { setIsAuthenticated } = useAuth();
+  const [loading, setLoading] = useState(true);
 
   const getUserData = async () => {
     const userData = await fetchUserData();
@@ -24,14 +26,33 @@ const App = () => {
     getUserData();
   }, []);
 
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500); 
+
+    return () => clearTimeout(timer); 
+  }, []);
+
   const isResumeBuilder = location.pathname.startsWith("/resume-build");
   return (
     <div className="bg-gray-100">
-      <Navbar />
-      <div className={`min-h-[100vh] max-w-[1600px] bg-white m-auto ${isResumeBuilder ? "" : "xl:px-40 lg:px-20 md:px-12 px-4"}`}>
-        <Outlet />
-      </div>
-      <Footer />
+      {loading ? (
+        <Loader /> 
+      ) : (
+        <>
+          <Navbar />
+          <div
+            className={`min-h-[100vh] max-w-[1600px] bg-white m-auto ${
+              isResumeBuilder ? "" : "xl:px-40 lg:px-20 md:px-12 px-4"
+            }`}
+          >
+            <Outlet />
+          </div>
+          <Footer />
+        </>
+      )}
     </div>
   );
 };

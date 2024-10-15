@@ -1,50 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*{
-    font-family: "Montserrat", sans-serif;
+* {
+  font-family: "Montserrat", sans-serif;
 }
 
-.banner_blob{
-    background: url('./assets/blob.png');
-    background-repeat: no-repeat;
-    background-size:cover;
-    background-position: left;
+.banner_blob {
+  background: url("./assets/blob.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left;
 }
 .dark_gradient {
-  background: linear-gradient(#656e83dc,#656e83d8) ,url('./assets/resume_back.jpg');
+  background: linear-gradient(#656e83dc, #656e83d8),
+    url("./assets/resume_back.jpg");
   background-size: cover;
   background-repeat: repeat;
 }
 .section-gradient {
-  background: linear-gradient(to right, #fff,#f3f0e7,#fff) ;
+  background: linear-gradient(to right, #fff, #f3f0e7, #fff);
 }
 ::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 10px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: #555;
-  }
-  
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: #888 #f1f1f1;
-  }
-  
+  width: 10px;
+}
 
-  .bg-gradient-custom {
-    background: linear-gradient(to right, #fff, #ebebeb, #fff);
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+.bg-gradient-custom {
+  background: linear-gradient(to right, #fff, #ebebeb, #fff);
+}
+
+.loader {
+  width: 60px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid lightblue;
+  border-right-color: #3f75e4;
+  animation: l2 1s infinite linear;
+}
+@keyframes l2 {
+  to {
+    transform: rotate(1turn);
   }
+}
+

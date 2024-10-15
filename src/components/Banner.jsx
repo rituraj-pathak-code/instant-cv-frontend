@@ -1,6 +1,6 @@
 import { FaLightbulb } from "react-icons/fa6";
 import header_pic from "../assets/header_pic.jpg";
-import Button from "../components/Button";
+import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { bannerTexts } from "../constants/texts";
 

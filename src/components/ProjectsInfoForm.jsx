@@ -1,7 +1,7 @@
 import { FieldArray } from "formik";
 import TextField from "./TextField";
+import Button from "./Button";
 import { FaRegTrashAlt } from "react-icons/fa";
-import Button from "../components/Button";
 import { Textarea } from "@headlessui/react";
 
 const ProjectsInfoForm = ({ formik }) => {
@@ -16,7 +16,7 @@ const ProjectsInfoForm = ({ formik }) => {
           <>
             {formik.values.projectsInfo?.map((_, index) => (
               <div
-                className="grid grid-cols-2 gap-4 mt-2 px-[12px] pt-4 pb-8 shadow-sm rounded-lg border relative"
+                className="grid lg:grid-cols-2 gap-4 mt-2 px-[12px] pt-4 pb-8 shadow-sm rounded-lg border relative"
                 key={index}
               >
                 {index !== 0 && (

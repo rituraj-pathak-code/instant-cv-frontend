@@ -1,12 +1,12 @@
 import { FaGithub } from "react-icons/fa";
-import { useResumeInfo } from "../../contexts/ResumeInfoContext";
+import { useResumeInfo } from "../../../contexts/ResumeInfoContext";
 import { useCallback, useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import {reorder } from "../../config/util";
-import { getResumeUIArray } from "../../config/uiUtils";
+import {reorder } from "../../../config/util";
+import { getResumeUIArray2 } from "../../../config/uiUtils";
 
 
-const Template = () => {
+const Template2 = () => {
   const { personalInfo, education, skills, experience, projects } = useResumeInfo();
   const [items, setItems] = useState([]);
 
@@ -37,62 +37,60 @@ const Template = () => {
 
   useEffect(() => {
     setItems(
-      getResumeUIArray(education, skills, experience, projects)
+      getResumeUIArray2(education, skills, experience, projects)
     );
   }, [education, skills, experience, projects]);
 
 
   return (
-    <div className="min-h-[83vh] shadow py-6 px-4 text-xs w-[500px] bg-white">
+    <div className="min-h-[83vh] shadow py-4 px-4 text-xs w-[500px] bg-white">
 
-      <div className="mb-[5px]">
-        <h2 className="font-bold text-lg text-center">
+      <div className="mb-[5px] flex items-center justify-between">
+        <div>
+        <h2 className="font-extrabold text-xl text-nowrap text-left text-[#0845A4]">
           {personalInfo?.firstName} {personalInfo?.lastName}
         </h2>
         {personalInfo?.phone && personalInfo?.email && (
-          <p className="text-center my-[3px]">
+          <p className="text-left my-[3px]">
             {personalInfo?.phone} / {personalInfo?.email}
           </p>
         )}
-        <div className="flex justify-center items-center gap-4">
+        </div>
+        <div className="flex justify-center flex-col text-[10px]">
           {personalInfo?.github && (
             <a
               href={personalInfo?.github}
-              className="flex justify-center items-center gap-2 text-blue-900"
+              className=" text-blue-700"
               target="_blank"
             >
-              <FaGithub />
-              <span>GITHUB</span>
+              <span>Github</span>
             </a>
           )}
           {personalInfo?.linkedin && (
             <a
               href={personalInfo?.linkedin}
-              className="flex justify-center items-center gap-2 text-blue-900"
+              className=" text-blue-700"
               target="_blank"
             >
-              <FaGithub />
-              <span>LINKEDIN</span>
+              <span>Linkedin</span>
             </a>
           )}
           {personalInfo?.portfolio && (
             <a
               href={personalInfo?.portfolio}
-              className="flex justify-center items-center gap-2 text-blue-900"
+              className=" text-blue-700"
               target="_blank"
             >
-              <FaGithub />
-              <span>PORTFOLIO</span>
+              <span>Portfolio</span>
             </a>
           )}
           {personalInfo?.leetcode && (
             <a
               href={personalInfo?.leetcode}
-              className="flex justify-center items-center gap-2 text-blue-900"
+              className=" text-blue-700"
               target="_blank"
             >
-              <FaGithub />
-              <span>LEETCODE</span>
+              <span>Leetcode</span>
             </a>
           )}
         </div>
@@ -132,4 +130,4 @@ const Template = () => {
   );
 };
 
-export default Template;
+export default Template2;
