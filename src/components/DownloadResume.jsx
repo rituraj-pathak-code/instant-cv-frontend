@@ -1,14 +1,13 @@
 import Button from "../components/Button";
-import { fetchResume } from "../config";
+import { postResume } from "../config";
 import { useResumeInfo } from "../contexts/ResumeInfoContext";
-import axios from "axios";
 
 const DownloadResume = () => {
   const { personalInfo, education, skills, experience, projects } =
     useResumeInfo();
 
   const downloadResume = async () => {
-   const res = await fetchResume(personalInfo, education, skills, experience, projects )
+   const res = await postResume(personalInfo, education, skills, experience, projects )
 
    console.log(res)
 

@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthenticationProvider } from "./contexts/AuthenticationContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import MyResume from "./pages/MyResume.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/myresume",
+        element: <MyResume />,
       },
     ],
   },

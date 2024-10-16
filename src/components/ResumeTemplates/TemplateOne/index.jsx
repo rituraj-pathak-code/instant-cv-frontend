@@ -43,7 +43,7 @@ const Template = () => {
 
 
   return (
-    <div className="min-h-[83vh] shadow py-6 px-4 text-xs w-[500px] bg-white">
+    <div className="min-h-[83vh] max-h-[90vh] shadow py-6 px-4 text-xs w-[600px] bg-white overflow-y-scroll">
 
       <div className="mb-[5px]">
         <h2 className="font-bold text-lg text-center">

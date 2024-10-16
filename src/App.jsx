@@ -19,12 +19,15 @@ const App = () => {
       localStorage.setItem("user", userData?.displayName);
       localStorage.setItem("userPhoto", userData?.photo);
       localStorage.setItem("userEmail", userData?.email);
+      localStorage.setItem("userId", userData?._id);
       setIsAuthenticated(true);
     }
   };
   useEffect(() => {
     getUserData();
   }, []);
+
+
 
   useEffect(() => {
     setLoading(true);

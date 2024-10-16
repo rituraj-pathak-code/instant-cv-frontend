@@ -80,7 +80,7 @@ const Navbar = () => {
               }}
             >
               <MenuItem onClick={() => setAnchorEl(null)}>Profile</MenuItem>
-              <MenuItem onClick={() => setAnchorEl(null)}>My Resume</MenuItem>
+              <MenuItem onClick={() => navigate('/myresume')}>My Resume</MenuItem>
               <MenuItem onClick={logoutHandler}>Logout</MenuItem>
             </Menu>
           </>
