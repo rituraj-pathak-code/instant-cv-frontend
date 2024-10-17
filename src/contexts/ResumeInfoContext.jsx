@@ -25,7 +25,7 @@ export const ResumeInfoProvider = ({ children }) => {
   const [skills, setSkills] = useState([
     {
       skill_type: "",
-      skills: ["","",""],
+      skills: ["", "", ""],
     },
   ]);
   const [experience, setExperience] = useState([
@@ -34,7 +34,7 @@ export const ResumeInfoProvider = ({ children }) => {
       role: "",
       start_date: "",
       end_date: "",
-      description: [""]
+      description: [""],
     },
   ]);
   const [projects, setProjects] = useState([
@@ -44,6 +44,50 @@ export const ResumeInfoProvider = ({ children }) => {
       link: "",
     },
   ]);
+
+  const resetResumeItems = () => {
+    setPersonalInfo({
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
+      github: "",
+      linkedin: "",
+      portfolio: "",
+      leetcode: "",
+    });
+    setEducation([
+      {
+        degree: "",
+        institute: "",
+        start_date: "",
+        end_date: "",
+      },
+    ]);
+    setSkills([
+      {
+        skill_type: "",
+        skills: ["", "", ""],
+      },
+    ]);
+    setExperience([
+      {
+        company: "",
+        role: "",
+        start_date: "",
+        end_date: "",
+        description: [""],
+      },
+    ]);
+
+    setProjects([
+      {
+        title: "",
+        description: "",
+        link: "",
+      },
+    ]);
+  };
   return (
     <ResumeContext.Provider
       value={{
@@ -56,7 +100,8 @@ export const ResumeInfoProvider = ({ children }) => {
         experience,
         setExperience,
         projects,
-        setProjects
+        setProjects,
+        resetResumeItems
       }}
     >
       {children}

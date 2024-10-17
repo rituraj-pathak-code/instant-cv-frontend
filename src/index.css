@@ -57,6 +57,13 @@
   border-right-color: #3f75e4;
   animation: l2 1s infinite linear;
 }
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 20rem));
+  gap: 20px;
+  justify-content: center;
+}
+
 @keyframes l2 {
   to {
     transform: rotate(1turn);

@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import Button from "../components/Button";
 import useScrollPosition from "../hooks/useScrollPosition";
@@ -6,8 +6,11 @@ import { useAuth } from "../contexts/AuthenticationContext";
 import Avatar from "@mui/material/Avatar";
 import { Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
+import ProfileDialog from "./ProfileDialog";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 const Navbar = () => {
+  const [isProfileDialogOpen, setIsProfileDialogOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const scrollPosition = useScrollPosition();
@@ -22,14 +25,27 @@ const Navbar = () => {
     localStorage.removeItem("user");
     setIsAuthenticated(false);
   };
+  const myResumeHandler = () => {
+    setAnchorEl(null);
+    navigate("/myresume");
+  };
+  const profileDialogHandler = () => {
+    setAnchorEl(null);
+    setIsProfileDialogOpen(true);
+  };
+
+  const templatesHandler = () => {
+    setAnchorEl(null);
+    navigate("/templates");
+  };
   return (
     <div
       className={`flex justify-between items-center xl:px-40 lg:px-20 md:px-12 px-4 py-4 sticky top-0 transition-all bg-white duration-300 border-[1px] border-gray-100 
         ${scrollPosition > 250 && "translate-y-[-100%]"}`}
     >
-      <div>
+      <Link to={"/"}>
         <img src={logo} alt="" className="w-[180px]" />
-      </div>
+      </Link>
       <div className="flex items-center gap-8">
         <nav className="gap-8 items-center hidden sm:flex">
           <NavLink
@@ -48,14 +64,14 @@ const Navbar = () => {
           >
             Templates
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to={"/contact"}
             className={({ isActive }) =>
               isActive ? "font-semibold text-[#8681FF]" : ""
             }
           >
             Contact
-          </NavLink>
+          </NavLink> */}
         </nav>
         {isAuthenticated ? (
           <>
@@ -69,7 +85,6 @@ const Navbar = () => {
               onClick={(event) => setAnchorEl(event.currentTarget)}
               style={{ cursor: "pointer" }}
             />
-
             <Menu
               id="profile-menu"
               anchorEl={anchorEl}
@@ -78,9 +93,15 @@ const Navbar = () => {
               MenuListProps={{
                 "aria-labelledby": "avatar-menu",
               }}
+              disableScrollLock={true}
             >
-              <MenuItem onClick={() => setAnchorEl(null)}>Profile</MenuItem>
-              <MenuItem onClick={() => navigate('/myresume')}>My Resume</MenuItem>
+              <MenuItem onClick={profileDialogHandler}>Profile</MenuItem>
+              <div className="sm:hidden">
+                <MenuItem onClick={templatesHandler} className="sm:hidden">
+                  Templates
+                </MenuItem>
+              </div>
+              <MenuItem onClick={myResumeHandler}>My Resume</MenuItem>
               <MenuItem onClick={logoutHandler}>Logout</MenuItem>
             </Menu>
           </>
@@ -94,6 +115,10 @@ const Navbar = () => {
           </Button>
         )}
       </div>
+      <ProfileDialog
+        isOpen={isProfileDialogOpen}
+        setIsOpen={setIsProfileDialogOpen}
+      />
     </div>
   );
 };

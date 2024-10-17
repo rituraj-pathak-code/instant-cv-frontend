@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "./contexts/AuthenticationContext";
 import { fetchUserData } from "./config";
 import Loader from "./components/Loader";
+import { ResumeInfoProvider } from "./contexts/ResumeInfoContext";
 
 const App = () => {
   const location = useLocation();
@@ -27,33 +28,33 @@ const App = () => {
     getUserData();
   }, []);
 
-
-
   useEffect(() => {
     setLoading(true);
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 500); 
+    }, 500);
 
-    return () => clearTimeout(timer); 
+    return () => clearTimeout(timer);
   }, []);
 
   const isResumeBuilder = location.pathname.startsWith("/resume-build");
   return (
     <div className="bg-gray-100">
       {loading ? (
-        <Loader /> 
+        <Loader />
       ) : (
         <>
-          <Navbar />
+          {!isResumeBuilder && <Navbar />}
           <div
             className={`min-h-[100vh] max-w-[1600px] bg-white m-auto ${
               isResumeBuilder ? "" : "xl:px-40 lg:px-20 md:px-12 px-4"
             }`}
           >
-            <Outlet />
+            <ResumeInfoProvider>
+              <Outlet />
+            </ResumeInfoProvider>
           </div>
-          <Footer />
+          {!isResumeBuilder && <Footer />}
         </>
       )}
     </div>

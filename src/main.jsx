@@ -36,6 +36,10 @@ const router = createBrowserRouter([
         path: "/myresume",
         element: <MyResume />,
       },
+      {
+        path: "/resume-build/:id",
+        element: <ProtectedRoute element={<Builder />} />,
+      },
     ],
   },
   {
@@ -46,16 +50,13 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
-  {
-    path: "/resume-build/:id",
-    element: <ProtectedRoute element={<Builder />}  />,
-  },
+ 
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthenticationProvider>
-      <RouterProvider router={router} />
+        <RouterProvider router={router} />
     </AuthenticationProvider>
     <ToastContainer
       position="top-right"

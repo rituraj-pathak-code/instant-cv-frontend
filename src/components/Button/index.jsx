@@ -11,15 +11,19 @@ const index = ({
   startIcon,
   endIcon,
   aria_label,
-  disabled
+  disabled,
+  className,
+  width
 }) => {
   return (
     <button
-      className={`${styles.button} ${styles[category]} ${styles[size]} ${outlined && styles.outlined_buttons}`}
+      className={`${styles.button} ${styles[category]} ${styles[size]} ${outlined && styles.outlined_buttons} ${className}`}
       type={type}
       onClick={onClick}
       disabled={category == "disabled"}
       aria-label={aria_label}
+      style={{width:width}}
+
     >
       <span>{startIcon}</span>
       <span>{children}</span>

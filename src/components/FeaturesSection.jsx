@@ -7,7 +7,7 @@ const FeaturesSection = () => {
       <h2 className="font-extrabold text-3xl sm:text-4xl lg:w-[15ch] text-[#13287E]">
         Create a Resume that gets results
       </h2>
-      <div className="flex flex-wrap gap-8 py-8">
+      <div className="grid xl:grid-cols-3 gap-8 py-8">
         {features.map((item) => (
           <div className="flex flex-col gap-2" key={item?.id}>
             <div className="flex items-center gap-2">

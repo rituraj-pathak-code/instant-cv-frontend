@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useResumeInfo } from "../contexts/ResumeInfoContext";
 import Button from "./Button";
 import { Form, Formik } from "formik";
 import { stepsConfig } from "../config/formSteps.js";
 import validationSchemas from "../schema/resumeFormSchema.js";
 import { errorDisplayForResumeForms } from "../config/util.js";
+import { editResume, postResume } from "../config/index.js";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-const ResumeForm = () => {
+const ResumeForm = ({ isEdit, resumeId }) => {
+  console.log(isEdit);
+  const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const {
     personalInfo,
@@ -29,12 +34,52 @@ const ResumeForm = () => {
     setProjects,
   };
 
+  const saveResume = async (formik) => {
+    if (isEdit) {
+      const res = await editResume(
+        resumeId,
+        formik.values?.personalInfo,
+        formik.values?.educationInfo,
+        formik.values?.skillsInfo,
+        formik.values?.experienceInfo,
+        formik.values?.projectsInfo
+      );
+      if (res.status == 200 || res.status == 201) {
+        toast.success("Resume saved!");
+      } else if (res.status == 401) {
+        navigate("/login");
+        toast.warn("Session Expired");
+      } else {
+        toast.error("Something went wrong!");
+      }
+    } else {
+      const res = await postResume(
+        formik.values?.personalInfo,
+        formik.values?.educationInfo,
+        formik.values?.skillsInfo,
+        formik.values?.experienceInfo,
+        formik.values?.projectsInfo
+      );
+      if (res.status == 200 || res.status == 201) {
+        toast.success("Resume saved!");
+      } else if (res.status == 401) {
+        navigate("/login");
+        toast.warn("Session Expired");
+      } else {
+        toast.error("Something went wrong!");
+      }
+    }
+  };
+
   const handleNextClick = (formik) => {
     formik.validateForm().then((errors) => {
       if (Object.keys(errors).length === 0) {
         const currentStep = stepsConfig[step];
         const setter = setters[currentStep.setter];
         setter(formik.values[currentStep.key]);
+        if (step == stepsConfig.length - 2) {
+          saveResume(formik);
+        }
         setStep((prev) => prev + 1);
       } else {
         const key = stepsConfig[step].key;
@@ -42,6 +87,7 @@ const ResumeForm = () => {
         errorDisplayForResumeForms(currentError);
       }
     });
+
   };
 
   const handlePrevClick = (formik) => {
@@ -55,16 +101,18 @@ const ResumeForm = () => {
       setStep((prev) => prev - 1);
     }
   };
-  console.log((step/(stepsConfig.length-1))*100)
-  console.log(step,stepsConfig.length)
+
+  console.log(personalInfo);
 
   return (
     <div>
-      <p className="mb-[5px] text-white font-semibold text-[9px] bg-[#FE7D8B] py-[4px] px-2 w-fit rounded-full">{(step/(stepsConfig.length-1))*100}% Complete</p>
+      <p className="mb-[5px] text-white font-semibold text-[9px] bg-[#FE7D8B] py-[4px] px-2 w-fit rounded-full">
+        {(step / (stepsConfig.length - 1)) * 100}% Complete
+      </p>
       <div className="bg-gray-300 w-full">
         <div
           className={`h-[3px] bg-[#FE7D8B] rounded transition`}
-          style={{ width: `${(step/(stepsConfig.length-1))*100}%` }}
+          style={{ width: `${(step / (stepsConfig.length - 1)) * 100}%` }}
         ></div>
       </div>
       <Formik
@@ -82,6 +130,7 @@ const ResumeForm = () => {
       >
         {(formik) => (
           <Form>
+            {console.log(formik)}
             {stepsConfig.map((item, index) => {
               if (index == step) {
                 const Component = item.component;
@@ -112,9 +161,7 @@ const ResumeForm = () => {
                   onClick={() => handleNextClick(formik)}
                   size="small"
                 >
-                  {step == stepsConfig.length - 2
-                    ? "Finish & Download"
-                    : "Save & Next"}
+                  {step == stepsConfig.length - 2 ? "Finish & Next" : "Next"}
                 </Button>
               </div>
             )}
