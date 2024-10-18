@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import DeleteDialog from "./DeleteDialog";
 import { useResumeInfo } from "../contexts/ResumeInfoContext";
 
-const MyResumeCard = ({ data, resumeId, fetchAllResume, setLoading }) => {
+const MyResumeCard = ({ data, fetchAllResume, setLoading}) => {
 ;
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -42,7 +42,7 @@ const MyResumeCard = ({ data, resumeId, fetchAllResume, setLoading }) => {
           <Button
             size="small"
             category="info"
-            onClick={() => navigate(`/resume-build/${resumeId}`, {state: {data: data}})}
+            onClick={() => navigate(`/resume-build/${data?.templateId}`, {state: {data: data}})}
           >
             Edit
           </Button>

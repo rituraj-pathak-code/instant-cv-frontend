@@ -7,7 +7,6 @@ import Avatar from "@mui/material/Avatar";
 import { Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
 import ProfileDialog from "./ProfileDialog";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 const Navbar = () => {
   const [isProfileDialogOpen, setIsProfileDialogOpen] = useState(false);

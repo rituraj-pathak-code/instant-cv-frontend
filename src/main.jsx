@@ -6,7 +6,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Templates from "./pages/Templates.jsx";
 import Contact from "./pages/Contact.jsx";
-import Signup from "./pages/Signup.jsx";
 import Login from "./pages/Login.jsx";
 import Builder from "./pages/Builder.jsx";
 import { ToastContainer } from "react-toastify";
@@ -41,10 +40,6 @@ const router = createBrowserRouter([
         element: <ProtectedRoute element={<Builder />} />,
       },
     ],
-  },
-  {
-    path: "/signup",
-    element: <Signup />,
   },
   {
     path: "/login",

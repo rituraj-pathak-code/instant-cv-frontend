@@ -60,7 +60,7 @@ const SkillInfoForm = ({ formik }) => {
                                 : " text-red-800 cursor-pointer"
                             }`}
                             type="button"
-                            onClick={() => remove()}
+                            onClick={() => remove(skillGroup.skills.length-1)}
                           >
                             Delete Skill
                           </button>

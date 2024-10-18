@@ -54,7 +54,7 @@ const Builder = () => {
                 Fill Your Information
               </h2>
             </div>
-            <ResumeForm isEdit={isEdit} resumeId={resumeData?.data._id} key={isEdit} />
+            <ResumeForm isEdit={isEdit} resumeId={resumeData?.data._id} key={isEdit} resumeTemplateId = {resumeTemplateId} />
           </div>
           <div className="w-[60%] lg:w-[50%] px-4 md:px-8 h-full hidden md:flex justify-center items-center sticky right-0 top-0 dark_gradient">
             {resumeTemplateId == 1 && <Template />}

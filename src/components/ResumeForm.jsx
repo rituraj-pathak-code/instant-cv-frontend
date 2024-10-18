@@ -9,8 +9,7 @@ import { editResume, postResume } from "../config/index.js";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const ResumeForm = ({ isEdit, resumeId }) => {
-  console.log(isEdit);
+const ResumeForm = ({ isEdit, resumeId, resumeTemplateId }) => {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const {
@@ -58,7 +57,8 @@ const ResumeForm = ({ isEdit, resumeId }) => {
         formik.values?.educationInfo,
         formik.values?.skillsInfo,
         formik.values?.experienceInfo,
-        formik.values?.projectsInfo
+        formik.values?.projectsInfo,
+        resumeTemplateId
       );
       if (res.status == 200 || res.status == 201) {
         toast.success("Resume saved!");
@@ -91,7 +91,6 @@ const ResumeForm = ({ isEdit, resumeId }) => {
   };
 
   const handlePrevClick = (formik) => {
-    console.log(formik);
     const currentStepConfig = stepsConfig[step];
     if (!currentStepConfig.isFinalStep) {
       const setter = setters[currentStepConfig.setter];
@@ -102,7 +101,6 @@ const ResumeForm = ({ isEdit, resumeId }) => {
     }
   };
 
-  console.log(personalInfo);
 
   return (
     <div>
@@ -130,7 +128,6 @@ const ResumeForm = ({ isEdit, resumeId }) => {
       >
         {(formik) => (
           <Form>
-            {console.log(formik)}
             {stepsConfig.map((item, index) => {
               if (index == step) {
                 const Component = item.component;

@@ -2,9 +2,10 @@ import TextField from "./TextField";
 import Button from "./Button";
 import { FieldArray } from "formik";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 
 const EducationInfoForm = ({ formik }) => {
-  console.log(formik.values.educationInfo)
   return (
     <div>
       <h3 className="py-2 font-bold rounded-lg text-black text-lg mt-4">
@@ -18,13 +19,15 @@ const EducationInfoForm = ({ formik }) => {
                 className="grid lg:grid-cols-2 gap-4 mt-2 px-[12px] pt-4 pb-8 rounded border relative"
                 key={index}
               >
-                {index!==0 && 
-                    <button className="absolute right-2 top-2 bg-red-200 p-[4px] rounded-full" onClick={()=>remove(index)}>
-                    <FaRegTrashAlt color="red" size={12}/>
-                </button>
-                
-                }
-                
+                {index !== 0 && (
+                  <button
+                    className="absolute right-2 top-2 bg-red-200 p-[4px] rounded-full"
+                    onClick={() => remove(index)}
+                  >
+                    <FaRegTrashAlt color="red" size={12} />
+                  </button>
+                )}
+
                 <TextField
                   label={"Degree"}
                   name={`educationInfo[${index}].degree`}
@@ -37,24 +40,52 @@ const EducationInfoForm = ({ formik }) => {
                   onChange={formik?.handleChange}
                   value={formik.values.educationInfo[index].institute}
                 />
-                <TextField
+                <DatePicker
                   label={"Start Year"}
+                  views={["year"]}
                   name={`educationInfo[${index}].start_date`}
-                  onChange={formik?.handleChange}
-                  value={formik.values.educationInfo[index].start_date}
+                  openTo="year"
+                  maxDate={dayjs()}
+                  value={
+                    formik.values.educationInfo[index].start_date
+                      ? dayjs(`${formik.values.educationInfo[index].start_date}-01-01`)
+                      : null
+                  }
+                  onChange={(value) => {
+                    formik.setFieldValue(
+                      `educationInfo[${index}].start_date`,
+                      value ? value.year().toString() : ""
+                    );
+                  }}
                 />
-                <TextField
+                <DatePicker
                   label={"Passout Year"}
                   name={`educationInfo[${index}].end_date`}
-                  onChange={formik?.handleChange}
-                  value={formik.values.educationInfo[index].end_date}
+                  views={["year"]}
+                  openTo="year"
+                  maxDate={dayjs()}
+                  value={
+                    formik.values.educationInfo[index].end_date
+                      ? dayjs(`${formik.values.educationInfo[index].end_date}-01-01`)
+                      : null
+                  }
+                  onChange={(value) => {
+                    formik.setFieldValue(
+                      `educationInfo[${index}].end_date`,
+                      value ? value.year().toString() : ""
+                    );
+                  }}
                 />
               </div>
             ))}
             <div className="flex justify-end my-4">
               <Button
                 size="small"
-                category={formik.values.educationInfo.length>2 ? "disabled" : "success"}
+                category={
+                  formik.values.educationInfo.length > 2
+                    ? "disabled"
+                    : "success"
+                }
                 outlined
                 onClick={() =>
                   push({

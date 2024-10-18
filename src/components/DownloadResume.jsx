@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import Button from "../components/Button";
 import { downloadResume, editResume, postResume } from "../config";
 import { useResumeInfo } from "../contexts/ResumeInfoContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 
 const DownloadResume = () => {
@@ -10,6 +10,8 @@ const DownloadResume = () => {
   const navigate = useNavigate();
   const { personalInfo, education, skills, experience, projects } =
     useResumeInfo();
+  const { id: resumeTemplateId } = useParams();
+
 
   const downloadResumeHandler = async () => {
     setLoading(true)
@@ -18,7 +20,8 @@ const DownloadResume = () => {
       education,
       skills,
       experience,
-      projects
+      projects,
+      resumeTemplateId
     );
     if (res.status == 401) {
       navigate("/login");

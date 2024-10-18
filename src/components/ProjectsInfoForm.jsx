@@ -5,7 +5,6 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { Textarea } from "@headlessui/react";
 
 const ProjectsInfoForm = ({ formik }) => {
-  console.log(formik.values);
   return (
     <div>
       <h3 className="py-2 font-bold rounded-lg text-black text-lg mt-4">

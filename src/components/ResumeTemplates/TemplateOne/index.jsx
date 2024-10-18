@@ -20,8 +20,6 @@ const Template = () => {
         result.source.index,
         result.destination.index
       );
-      console.log(reorderedItems);
-
       setItems(reorderedItems);
     },
     [items]

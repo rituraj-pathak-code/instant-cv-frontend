@@ -2,9 +2,10 @@ import TextField from "./TextField";
 import Button from "./Button";
 import { FieldArray } from "formik";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 
 const ExperienceInfoForm = ({ formik }) => {
-    console.log(formik.values.experienceInfo)
   return (
     <div>
       <h3 className="py-2 font-bold rounded-lg text-black text-lg mt-4">
@@ -27,32 +28,56 @@ const ExperienceInfoForm = ({ formik }) => {
                   </button>
                 )}
                 <div className="flex flex-col lg:flex-row gap-4">
-                    <TextField
+                  <TextField
                     label={"Role Name"}
                     name={`experienceInfo[${index}].role`}
                     onChange={formik?.handleChange}
                     value={formik.values.experienceInfo[index].role}
-                    />
-                    <TextField
+                  />
+                  <TextField
                     label={"Company Name"}
                     name={`experienceInfo[${index}].company`}
                     onChange={formik?.handleChange}
                     value={formik.values.experienceInfo[index].company}
-                    />
+                  />
                 </div>
-                <div className="flex flex-col lg:flex-row gap-4">
-                    <TextField
+                <div className="grid lg:grid-cols-2 gap-4">
+                  <DatePicker
                     label={"From"}
+                    views={["year"]}
                     name={`experienceInfo[${index}].start_date`}
-                    onChange={formik?.handleChange}
-                    value={formik.values.experienceInfo[index].start_year}
-                    />
-                    <TextField
+                    openTo="year"
+                    maxDate={dayjs()}
+                    value={
+                      formik.values.experienceInfo[index].start_date
+                        ? dayjs(`${formik.values.experienceInfo[index].start_date}-01-01`) 
+                        : null
+                    }
+                    onChange={(value) => {
+                      formik.setFieldValue(
+                        `experienceInfo[${index}].start_date`,
+                        value ? value.year().toString()  : ""
+                      );
+                    }}
+                  />
+                  <DatePicker
                     label={"To"}
+                    views={["year"]}
                     name={`experienceInfo[${index}].end_date`}
-                    onChange={formik?.handleChange}
-                    value={formik.values.experienceInfo[index].end_year}
-                    />
+                    openTo="year"
+                    maxDate={dayjs()}
+                    value={
+                      formik.values.experienceInfo[index].end_date
+                        ? dayjs(`${formik.values.experienceInfo[index].end_date}-01-01`)
+                        : null
+                    }
+                    onChange={(value) => {
+                      formik.setFieldValue(
+                        `experienceInfo[${index}].end_date`,
+                        value ? value.year().toString()  : ""
+                      );
+                    }}
+                  />
                 </div>
                 <FieldArray name={`experienceInfo[${index}].description`}>
                   {({ push, remove }) => (
@@ -61,9 +86,9 @@ const ExperienceInfoForm = ({ formik }) => {
                         <p className="text-sm mb-[3px]">Description</p>
                         <div className="flex gap-4">
                           <button
-                            disabled={experienceGroup.description.length > 2}
+                            disabled={experienceGroup.description.length > 4}
                             className={`text-xs font-semibold ${
-                                experienceGroup.description.length > 2
+                              experienceGroup.description.length > 4
                                 ? "text-gray-400 cursor-not-allowed"
                                 : " text-blue-800 cursor-pointer"
                             }`}
@@ -75,12 +100,14 @@ const ExperienceInfoForm = ({ formik }) => {
                           <button
                             disabled={experienceGroup.description.length < 2}
                             className={`text-xs font-semibold ${
-                                experienceGroup.description.length < 2
+                              experienceGroup.description.length < 2
                                 ? "text-gray-400 cursor-not-allowed"
                                 : " text-red-800 cursor-pointer"
                             }`}
                             type="button"
-                            onClick={() => remove(experienceGroup.description.length-1)}
+                            onClick={() =>
+                              remove(experienceGroup.description.length - 1)
+                            }
                           >
                             Delete Description
                           </button>
@@ -94,7 +121,9 @@ const ExperienceInfoForm = ({ formik }) => {
                               placeholder="Describe your key responsibilities and accomplishments."
                               onChange={formik?.handleChange}
                               value={
-                                formik.values.experienceInfo[index].description[idx]
+                                formik.values.experienceInfo[index].description[
+                                  idx
+                                ]
                               }
                               width={"100%"}
                             />
@@ -110,14 +139,16 @@ const ExperienceInfoForm = ({ formik }) => {
               <Button
                 size="small"
                 category={
-                  formik.values.experienceInfo.length > 3 ? "disabled" : "success"
+                  formik.values.experienceInfo.length > 3
+                    ? "disabled"
+                    : "success"
                 }
                 outlined
                 onClick={() =>
                   push({
                     company: "",
                     role: "",
-                    description: [""]
+                    description: [""],
                   })
                 }
               >

@@ -23,7 +23,8 @@ export const postResume = async (
   education,
   skills,
   experience,
-  projects
+  projects,
+  templateId
 ) => {
   const headers = {
     "Content-Type": "application/json",
@@ -31,7 +32,7 @@ export const postResume = async (
   try {
     const res = await axios.post(
       `${BASE_URL}/api/resume`,
-      { personalInfo, education, skills, experience, projects },
+      { personalInfo, education, skills, experience, projects, templateId },
       {
         withCredentials: true,
         headers,
@@ -110,7 +111,8 @@ export const downloadResume = async (
   education,
   skills,
   experience,
-  projects
+  projects,
+  templateId
 ) => {
   const headers = {
     "Content-Type": "application/json",
@@ -118,7 +120,7 @@ export const downloadResume = async (
   try {
     const res = await axios.post(
       `${BASE_URL}/api/resume/download`,
-      { personalInfo, education, skills, experience, projects },
+      { personalInfo, education, skills, experience, projects,templateId },
       {
         withCredentials: true,
         headers,

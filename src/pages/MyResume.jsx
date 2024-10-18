@@ -23,6 +23,9 @@ const MyResume = () => {
       setResumeList(res.data.data);
       setTotalRecords(res.data.totalRecords);
       setLimit(res.data.limit);
+      if(res?.data?.data?.length==0 && page !==1){
+        setPage(page - 1)
+      }
     } else if (res.status == 401) {
       navigate("/login");
       toast.warn("Session expired", { toastId: "session_expired" });

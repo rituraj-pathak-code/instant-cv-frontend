@@ -142,8 +142,8 @@ export const getResumeUIArray = (education, skills, experience, projects) => {
                   <p>{item?.institute}</p>
                 </div>
                 <p>
-                  {item?.start_date && `${item.start_date} - `}
-                  {item?.end_date}
+                  {item?.start_date && `${new Date(item.start_date).getFullYear()} - `}
+                  {item?.end_date && new Date(item.end_date).getFullYear()}
                 </p>
               </div>
             ))}
@@ -168,8 +168,8 @@ export const getResumeUIArray = (education, skills, experience, projects) => {
                     </div>
                     <div>
                       <p>
-                        {exp?.start_date && `${exp.start_date} - `}
-                        {exp?.end_date}
+                        {exp?.start_date && `${new Date(exp.start_date).getFullYear()} - `}
+                        {exp?.end_date && new Date(exp.end_date).getFullYear()}
                       </p>
                     </div>
                   </div>

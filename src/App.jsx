@@ -8,6 +8,8 @@ import { useAuth } from "./contexts/AuthenticationContext";
 import { fetchUserData } from "./config";
 import Loader from "./components/Loader";
 import { ResumeInfoProvider } from "./contexts/ResumeInfoContext";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 const App = () => {
   const location = useLocation();
@@ -50,9 +52,11 @@ const App = () => {
               isResumeBuilder ? "" : "xl:px-40 lg:px-20 md:px-12 px-4"
             }`}
           >
+             <LocalizationProvider dateAdapter={AdapterDayjs}>
             <ResumeInfoProvider>
               <Outlet />
             </ResumeInfoProvider>
+            </LocalizationProvider>
           </div>
           {!isResumeBuilder && <Footer />}
         </>
