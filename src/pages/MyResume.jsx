@@ -64,14 +64,13 @@ const MyResume = () => {
             />
           ))}
         </div>
-        {resumeList.length > 0 && (
-          <div className="flex justify-center sm:justify-end my-4">
+        {totalRecords / limit > 1 && (
+          <div className="flex justify-center my-4">
             <Pagination
               count={Math.ceil(totalRecords / limit)}
               page={page}
               onChange={(e, value) => setPage(value)}
-              size="large"
-              color="secondary"
+              color="primary"
               variant="outlined"
             />
           </div>

@@ -27,7 +27,7 @@ const MyResumeCard = ({ data, fetchAllResume, setLoading}) => {
 
   return (
     <>
-      <div className="shadow-xl">
+      <div className="shadow-xl border">
         <div>
           <img
             src={`${data?.image}`}

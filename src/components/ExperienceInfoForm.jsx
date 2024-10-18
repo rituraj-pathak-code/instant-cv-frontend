@@ -42,42 +42,56 @@ const ExperienceInfoForm = ({ formik }) => {
                   />
                 </div>
                 <div className="grid lg:grid-cols-2 gap-4">
-                  <DatePicker
-                    label={"From"}
-                    views={["year"]}
-                    name={`experienceInfo[${index}].start_date`}
-                    openTo="year"
-                    maxDate={dayjs()}
-                    value={
-                      formik.values.experienceInfo[index].start_date
-                        ? dayjs(`${formik.values.experienceInfo[index].start_date}-01-01`) 
-                        : null
-                    }
-                    onChange={(value) => {
-                      formik.setFieldValue(
-                        `experienceInfo[${index}].start_date`,
-                        value ? value.year().toString()  : ""
-                      );
-                    }}
-                  />
-                  <DatePicker
-                    label={"To"}
-                    views={["year"]}
-                    name={`experienceInfo[${index}].end_date`}
-                    openTo="year"
-                    maxDate={dayjs()}
-                    value={
-                      formik.values.experienceInfo[index].end_date
-                        ? dayjs(`${formik.values.experienceInfo[index].end_date}-01-01`)
-                        : null
-                    }
-                    onChange={(value) => {
-                      formik.setFieldValue(
-                        `experienceInfo[${index}].end_date`,
-                        value ? value.year().toString()  : ""
-                      );
-                    }}
-                  />
+                  <div>
+                    <p className="text-xs text-gray-600 font-semibold mb-2">
+                      Start Year
+                    </p>
+                    <DatePicker
+                      sx={{width: "100%"}}
+                      views={["year"]}
+                      name={`experienceInfo[${index}].start_date`}
+                      openTo="year"
+                      maxDate={dayjs()}
+                      value={
+                        formik.values.experienceInfo[index].start_date
+                          ? dayjs(
+                              `${formik.values.experienceInfo[index].start_date}-01-01`
+                            )
+                          : null
+                      }
+                      onChange={(value) => {
+                        formik.setFieldValue(
+                          `experienceInfo[${index}].start_date`,
+                          value ? value.year().toString() : ""
+                        );
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-600 font-semibold mb-2">
+                      End Year
+                    </p>
+                    <DatePicker
+                      sx={{width: "100%"}}
+                      views={["year"]}
+                      name={`experienceInfo[${index}].end_date`}
+                      openTo="year"
+                      maxDate={dayjs()}
+                      value={
+                        formik.values.experienceInfo[index].end_date
+                          ? dayjs(
+                              `${formik.values.experienceInfo[index].end_date}-01-01`
+                            )
+                          : null
+                      }
+                      onChange={(value) => {
+                        formik.setFieldValue(
+                          `experienceInfo[${index}].end_date`,
+                          value ? value.year().toString() : ""
+                        );
+                      }}
+                    />
+                  </div>
                 </div>
                 <FieldArray name={`experienceInfo[${index}].description`}>
                   {({ push, remove }) => (

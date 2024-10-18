@@ -40,15 +40,21 @@ const EducationInfoForm = ({ formik }) => {
                   onChange={formik?.handleChange}
                   value={formik.values.educationInfo[index].institute}
                 />
+                <div>
+                 <p className="text-xs text-gray-600 font-semibold mb-2">
+                    Start Year
+                  </p>
                 <DatePicker
-                  label={"Start Year"}
+                  sx={{width: "100%"}}
                   views={["year"]}
                   name={`educationInfo[${index}].start_date`}
                   openTo="year"
                   maxDate={dayjs()}
                   value={
                     formik.values.educationInfo[index].start_date
-                      ? dayjs(`${formik.values.educationInfo[index].start_date}-01-01`)
+                      ? dayjs(
+                          `${formik.values.educationInfo[index].start_date}-01-01`
+                        )
                       : null
                   }
                   onChange={(value) => {
@@ -58,24 +64,32 @@ const EducationInfoForm = ({ formik }) => {
                     );
                   }}
                 />
-                <DatePicker
-                  label={"Passout Year"}
-                  name={`educationInfo[${index}].end_date`}
-                  views={["year"]}
-                  openTo="year"
-                  maxDate={dayjs()}
-                  value={
-                    formik.values.educationInfo[index].end_date
-                      ? dayjs(`${formik.values.educationInfo[index].end_date}-01-01`)
-                      : null
-                  }
-                  onChange={(value) => {
-                    formik.setFieldValue(
-                      `educationInfo[${index}].end_date`,
-                      value ? value.year().toString() : ""
-                    );
-                  }}
-                />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-600 font-semibold mb-2">
+                    End Year
+                  </p>
+                  <DatePicker
+                    sx={{width: "100%"}}
+                    name={`educationInfo[${index}].end_date`}
+                    views={["year"]}
+                    openTo="year"
+                    maxDate={dayjs()}
+                    value={
+                      formik.values.educationInfo[index].end_date
+                        ? dayjs(
+                            `${formik.values.educationInfo[index].end_date}-01-01`
+                          )
+                        : null
+                    }
+                    onChange={(value) => {
+                      formik.setFieldValue(
+                        `educationInfo[${index}].end_date`,
+                        value ? value.year().toString() : ""
+                      );
+                    }}
+                  />
+                </div>
               </div>
             ))}
             <div className="flex justify-end my-4">
