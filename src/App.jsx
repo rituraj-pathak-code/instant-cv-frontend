@@ -1,33 +1,39 @@
 import "./index.css";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import { useAuth } from "./contexts/AuthenticationContext";
-import { fetchUserData } from "./config";
 import Loader from "./components/Loader";
 import { ResumeInfoProvider } from "./contexts/ResumeInfoContext";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { fetchUserData } from "./config";
 
 const App = () => {
   const location = useLocation();
   const { setIsAuthenticated } = useAuth();
+  const navigate = useNavigate('/')
   const [loading, setLoading] = useState(true);
+  const _id = localStorage.getItem('userId')
 
   const getUserData = async () => {
-    const userData = await fetchUserData();
+    const userData = await fetchUserData(_id);
     if (userData) {
-      localStorage.setItem("user", userData?.displayName);
-      localStorage.setItem("userPhoto", userData?.photo);
-      localStorage.setItem("userEmail", userData?.email);
-      localStorage.setItem("userId", userData?._id);
       setIsAuthenticated(true);
+    } else {
+      localStorage.removeItem("user");
+      localStorage.removeItem("username");
+      localStorage.removeItem("userId");
+      navigate('/login')
     }
   };
+
   useEffect(() => {
-    getUserData();
+    if(_id){
+      getUserData();
+    }
   }, []);
 
   useEffect(() => {

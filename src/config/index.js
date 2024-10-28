@@ -1,12 +1,69 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8000";
+export const DEV_BASE_URL = "http://localhost:8000";
+export const BASE_URL = "https://instant-cv-backend.vercel.app";
 
-export const fetchUserData = async () => {
+export const signup = async (name,username, password) => {
   try {
-    const response = await axios.get(`${BASE_URL}/api/user`, {
-      withCredentials: true,
-    });
+    const response = await axios.post(
+      `${BASE_URL}/api/signup`,
+      { name,username,password },
+      { withCredentials: true }
+    );
+    if (response.status == 201) {
+      return response;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    console.error(err);
+    return err;
+  }
+};
+
+
+export const login = async (username, password) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/api/login`,
+      {username, password},
+      { withCredentials: true }
+    );
+    if (response.status == 200) {
+      return response;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    return err;
+  }
+};
+
+export const logout = async () => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/api/logout`,
+      {},
+      { withCredentials: true }
+    );
+    if (response.status == 200) {
+      return response.data;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+};
+
+export const fetchUserData = async (_id) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/api/userData`,
+      { _id: _id },
+      { withCredentials: true }
+    );
     if (response.status == 200) {
       return response.data;
     } else {
@@ -120,22 +177,19 @@ export const downloadResume = async (
   try {
     const res = await axios.post(
       `${BASE_URL}/api/resume/download`,
-      { personalInfo, education, skills, experience, projects,templateId },
+      { personalInfo, education, skills, experience, projects, templateId },
       {
         withCredentials: true,
         headers,
-        responseType: "blob",
       }
     );
-    console.log(res)
+    console.log(res);
     if (res.status == 200) {
-      const url = window.URL.createObjectURL(new Blob([res.data]));
+      const { pdf, filename } = res.data; 
+      console.log(pdf,filename)
       const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute(
-        "download",
-        `${personalInfo.firstName}_${personalInfo.lastName}_Resume.pdf`
-      );
+      link.href = `data:application/pdf;base64,${pdf}`; 
+      link.setAttribute("download", filename); 
       document.body.appendChild(link);
       link.click();
       link.remove();

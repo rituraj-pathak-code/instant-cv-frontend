@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthenticationProvider } from "./contexts/AuthenticationContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import MyResume from "./pages/MyResume.jsx";
+import Signup from "./pages/Signup.jsx";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
   },
  
 ]);

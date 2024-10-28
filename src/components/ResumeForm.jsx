@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const ResumeForm = ({ isEdit, resumeId, resumeTemplateId }) => {
+  const [loading,setLoading] = useState(false)
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const {
@@ -34,6 +35,7 @@ const ResumeForm = ({ isEdit, resumeId, resumeTemplateId }) => {
   };
 
   const saveResume = async (formik) => {
+    setLoading(true)
     if (isEdit) {
       const res = await editResume(
         resumeId,
@@ -44,11 +46,14 @@ const ResumeForm = ({ isEdit, resumeId, resumeTemplateId }) => {
         formik.values?.projectsInfo
       );
       if (res.status == 200 || res.status == 201) {
+        setLoading(false)
+        setStep((prev) => prev + 1);
         toast.success("Resume saved!");
       } else if (res.status == 401) {
         navigate("/login");
         toast.warn("Session Expired");
       } else {
+        setLoading(false)
         toast.error("Something went wrong!");
       }
     } else {
@@ -61,11 +66,14 @@ const ResumeForm = ({ isEdit, resumeId, resumeTemplateId }) => {
         resumeTemplateId
       );
       if (res.status == 200 || res.status == 201) {
+        setLoading(false)
+        setStep((prev) => prev + 1);
         toast.success("Resume saved!");
       } else if (res.status == 401) {
         navigate("/login");
         toast.warn("Session Expired");
       } else {
+        setLoading(false)
         toast.error("Something went wrong!");
       }
     }
@@ -79,8 +87,10 @@ const ResumeForm = ({ isEdit, resumeId, resumeTemplateId }) => {
         setter(formik.values[currentStep.key]);
         if (step == stepsConfig.length - 2) {
           saveResume(formik);
+        } else {
+          setStep((prev) => prev + 1);
         }
-        setStep((prev) => prev + 1);
+        
       } else {
         const key = stepsConfig[step].key;
         const currentError = errors[key];
@@ -152,13 +162,13 @@ const ResumeForm = ({ isEdit, resumeId, resumeTemplateId }) => {
                 </Button>
                 <Button
                   category={
-                    step == stepsConfig.length - 2 ? "error" : "primary"
+                    step == stepsConfig.length - 2 ? loading ? "disabled":"error" : "primary"
                   }
                   type="button"
                   onClick={() => handleNextClick(formik)}
                   size="small"
                 >
-                  {step == stepsConfig.length - 2 ? "Finish & Next" : "Next"}
+                  {step == stepsConfig.length - 2 ? loading? "Please wait..." : "Finish & Next" : "Next"}
                 </Button>
               </div>
             )}

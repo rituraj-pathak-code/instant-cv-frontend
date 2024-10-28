@@ -7,6 +7,7 @@ import Avatar from "@mui/material/Avatar";
 import { Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
 import ProfileDialog from "./ProfileDialog";
+import { logout } from "../config";
 
 const Navbar = () => {
   const [isProfileDialogOpen, setIsProfileDialogOpen] = useState(false);
@@ -20,18 +21,24 @@ const Navbar = () => {
 
   const logoutHandler = async () => {
     setAnchorEl(null);
-    window.location.href = "http://localhost:8000/auth/google/logout";
-    localStorage.removeItem("user");
-    setIsAuthenticated(false);
+    const res = await logout();
+    console.log(res)
+    if(res){
+      localStorage.removeItem("user");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("username");
+      setIsAuthenticated(false);
+      navigate('/login')
+    }
   };
   const myResumeHandler = () => {
     setAnchorEl(null);
     navigate("/myresume");
   };
-  const profileDialogHandler = () => {
-    setAnchorEl(null);
-    setIsProfileDialogOpen(true);
-  };
+  // const deleteAccountHandler = () => {
+  //   setAnchorEl(null);
+  //   setIsProfileDialogOpen(true);
+  // };
 
   const templatesHandler = () => {
     setAnchorEl(null);
@@ -63,14 +70,6 @@ const Navbar = () => {
           >
             Templates
           </NavLink>
-          {/* <NavLink
-            to={"/contact"}
-            className={({ isActive }) =>
-              isActive ? "font-semibold text-[#8681FF]" : ""
-            }
-          >
-            Contact
-          </NavLink> */}
         </nav>
         {isAuthenticated ? (
           <>
@@ -94,13 +93,13 @@ const Navbar = () => {
               }}
               disableScrollLock={true}
             >
-              <MenuItem onClick={profileDialogHandler}>Profile</MenuItem>
               <div className="sm:hidden">
                 <MenuItem onClick={templatesHandler} className="sm:hidden">
                   Templates
                 </MenuItem>
               </div>
               <MenuItem onClick={myResumeHandler}>My Resume</MenuItem>
+              {/* <MenuItem onClick={deleteAccountHandler}>Delete Account</MenuItem> */}
               <MenuItem onClick={logoutHandler}>Logout</MenuItem>
             </Menu>
           </>
