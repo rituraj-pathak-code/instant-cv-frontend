@@ -42,7 +42,7 @@ const Login = () => {
       <div className="shadow border rounded w-[350px] flex flex-col justify-center  gap-4 py-8 px-4 bg-white">
         <img src={logo} alt="logo" className="w-[150px] m-auto" />
         <div className="flex flex-col items-center">
-          <h3 className="font-bold text-xl">Welcome to </h3>
+          <h3 className="font-bold text-xl">Welcome</h3>
           <p className="text-sm text-gray-500">
             Create your best resume today!
           </p>
